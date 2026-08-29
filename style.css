@@ -1,0 +1,423 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: transparent;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/* ================================
+   CONTAINER
+================================ */
+
+.s2-root {
+    position: fixed;
+
+    left: 50px;
+    bottom: 80px;
+
+    z-index: 999999;
+
+    pointer-events: none;
+}
+
+
+/* ================================
+   CARD
+================================ */
+
+.s2-card {
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    width: 520px;
+
+    padding: 18px 24px 18px 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(17, 17, 22, 0.96),
+            rgba(17, 17, 22, 0.86)
+        );
+
+    border: 2px solid #9147ff;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.55),
+        0 0 25px rgba(145, 71, 255, 0.35);
+
+    backdrop-filter: blur(6px);
+
+    overflow: hidden;
+}
+
+
+/* ================================
+   BRILHO PASSANDO PELO CARD
+================================ */
+
+.s2-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 80%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.15),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+
+    0% {
+        left: -120%;
+    }
+
+    60% {
+        left: 140%;
+    }
+
+    100% {
+        left: 140%;
+    }
+}
+
+
+/* ================================
+   AVATAR
+================================ */
+
+.s2-avatar-wrapper {
+
+    position: relative;
+
+    flex: 0 0 auto;
+
+    width: 92px;
+    height: 92px;
+}
+
+.s2-avatar-ring {
+
+    position: absolute;
+
+    inset: -4px;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            from 0deg,
+            #9147ff,
+            #ff4fd8,
+            #9147ff
+        );
+
+    animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.s2-avatar {
+
+    position: absolute;
+
+    width: 84px;
+    height: 84px;
+
+    left: 4px;
+    top: 4px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 3px solid #111116;
+
+    background: #111116;
+}
+
+
+/* ================================
+   CONTEÚDO
+================================ */
+
+.s2-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+
+    flex: 1;
+}
+
+.s2-title {
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    color: #d1b3ff;
+
+    opacity: 0.9;
+}
+
+.s2-username {
+
+    margin-top: 2px;
+
+    font-size: 26px;
+
+    font-weight: 800;
+
+    color: #ffffff;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.s2-game-line {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 5px;
+
+    color: #bf94ff;
+
+    font-size: 16px;
+
+    font-weight: 600;
+}
+
+.s2-game {
+
+    color: #ffffff;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.s2-footer {
+
+    margin-top: 6px;
+
+    font-size: 13px;
+
+    color: #bdbdbd;
+}
+
+
+/* ================================
+   CORAÇÃO
+================================ */
+
+.s2-heart-text {
+
+    display: inline-block;
+
+    margin-left: 4px;
+
+    font-size: 18px;
+
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.35);
+    }
+}
+
+
+/* ================================
+   ENTRADA
+================================ */
+
+.s2-root.show .s2-card {
+
+    animation:
+        s2-in 0.7s
+        cubic-bezier(.22, 1, .36, 1)
+        forwards;
+}
+
+@keyframes s2-in {
+
+    0% {
+
+        transform:
+            translateX(-140px)
+            scale(0.90);
+
+        opacity: 0;
+    }
+
+    100% {
+
+        transform:
+            translateX(0)
+            scale(1);
+
+        opacity: 1;
+    }
+}
+
+
+/* ================================
+   SAÍDA
+================================ */
+
+.s2-root.hide .s2-card {
+
+    animation:
+        s2-out 0.6s
+        cubic-bezier(.55, 0, 1, .45)
+        forwards;
+}
+
+@keyframes s2-out {
+
+    0% {
+
+        transform:
+            translateX(0)
+            scale(1);
+
+        opacity: 1;
+    }
+
+    100% {
+
+        transform:
+            translateX(-140px)
+            scale(0.92);
+
+        opacity: 0;
+    }
+}
+
+
+/* ================================
+   ESCONDIDO
+================================ */
+
+.s2-root.hidden {
+
+    display: none;
+}
+
+
+/* ================================
+   CORAÇÕES FLUTUANTES
+================================ */
+
+.s2-hearts {
+
+    position: absolute;
+
+    inset: 0;
+
+    overflow: visible;
+
+    pointer-events: none;
+}
+
+.s2-heart {
+
+    position: absolute;
+
+    bottom: 20px;
+
+    font-size: 18px;
+
+    opacity: 0;
+
+    animation:
+        heart-float 3.5s
+        ease-out
+        forwards;
+}
+
+@keyframes heart-float {
+
+    0% {
+
+        transform:
+            translateY(20px)
+            scale(0.6);
+
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    100% {
+
+        transform:
+            translateY(-150px)
+            scale(1.4)
+            rotate(20deg);
+
+        opacity: 0;
+    }
+}
